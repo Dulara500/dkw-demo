@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+  /* ─── Surface Colors ─────────────────────────────── */
+  --color-surface: #faf8ff;
+  --color-surface-dim: #dad9e1;
+  --color-surface-bright: #faf8ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f4f3fa;
+  --color-surface-container: #eeedf4;
+  --color-surface-container-high: #e9e7ef;
+  --color-surface-container-highest: #e3e1e9;
+  --color-surface-variant: #e3e1e9;
+  --color-surface-tint: #4059aa;
+
+  --color-on-surface: #1a1b21;
+  --color-on-surface-variant: #444651;
+  --color-inverse-surface: #2f3036;
+  --color-inverse-on-surface: #f1f0f7;
+
+  /* ─── Primary ─────────────────────────────────────── */
+  --color-primary: #00236f;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1e3a8a;
+  --color-on-primary-container: #90a8ff;
+  --color-inverse-primary: #b6c4ff;
+  --color-primary-fixed: #dce1ff;
+  --color-primary-fixed-dim: #b6c4ff;
+  --color-on-primary-fixed: #00164e;
+  --color-on-primary-fixed-variant: #264191;
+
+  /* ─── Secondary (Teal) ────────────────────────────── */
+  --color-secondary: #006a61;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #86f2e4;
+  --color-on-secondary-container: #006f66;
+  --color-secondary-fixed: #89f5e7;
+  --color-secondary-fixed-dim: #6bd8cb;
+  --color-on-secondary-fixed: #00201d;
+  --color-on-secondary-fixed-variant: #005049;
+
+  /* ─── Tertiary (Safety Orange) ────────────────────── */
+  --color-tertiary: #4f1700;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #742600;
+  --color-on-tertiary-container: #ff8d5e;
+  --color-tertiary-fixed: #ffdbce;
+  --color-tertiary-fixed-dim: #ffb599;
+  --color-on-tertiary-fixed: #370e00;
+  --color-on-tertiary-fixed-variant: #7f2b00;
+
+  /* ─── CTA / Safety Orange (actual orange, for buttons) ── */
+  --color-cta: #e55100;
+  --color-on-cta: #ffffff;
+  --color-cta-hover: #bf3c00;
+  --color-cta-border: #bf3c00;
+
+  /* ─── Error ───────────────────────────────────────── */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  /* ─── Outline ─────────────────────────────────────── */
+  --color-outline: #757682;
+  --color-outline-variant: #c5c5d3;
+
+  /* ─── Background ──────────────────────────────────── */
+  --color-background: #faf8ff;
+  --color-on-background: #1a1b21;
+
+  /* ─── Fonts ───────────────────────────────────────── */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ─── Typography Scale ────────────────────────────── */
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 56px;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-lg--font-weight: 700;
+
+  --text-headline-lg-mobile: 24px;
+  --text-headline-lg-mobile--line-height: 32px;
+  --text-headline-lg-mobile--font-weight: 700;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+
+  --text-label-md: 14px;
+  --text-label-md--line-height: 20px;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 500;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 16px;
+  --text-label-sm--font-weight: 500;
+
+  /* ─── Spacing ─────────────────────────────────────── */
+  --spacing-unit: 4px;
+  --spacing-gutter: 24px;
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile: 16px;
+
+  /* ─── Container ───────────────────────────────────── */
+  --width-container: 1280px;
+
+  /* ─── Border Radius ───────────────────────────────── */
+  --radius-sm: 0.125rem;
+  --radius: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* ─── Shadows ─────────────────────────────────────── */
+  --shadow-industrial: 0px 2px 0px rgba(17, 24, 39, 1);
+}
+
+/* ─── Global Base ─────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #faf8ff;
+  color: #1a1b21;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  background-color: #faf8ff;
+  color: #1a1b21;
+}
+
+/* ─── Typography Utilities ────────────────────────────── */
+.text-display-lg {
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.text-headline-lg {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.text-headline-lg-mobile {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.text-headline-md {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.text-body-lg {
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.text-body-md {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.text-label-md {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.text-label-sm {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── Container Utility ───────────────────────────────── */
+.max-w-container {
+  max-width: 1280px;
+}
+
+/* ─── Input / Form Styling ────────────────────────────── */
+input, select, textarea {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  border: 1px solid #9ca3af;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #00236f;
+}
+
+input::placeholder, textarea::placeholder {
+  font-family: 'JetBrains Mono', monospace;
+  color: #757682;
+}
+
+/* ─── Button Industrial Hover ─────────────────────────── */
+.btn-industrial {
+  box-shadow: 0px 2px 0px rgba(17, 24, 39, 1);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-industrial:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 4px 0px rgba(17, 24, 39, 1);
+}
