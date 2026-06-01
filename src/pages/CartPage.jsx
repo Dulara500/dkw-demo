@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 const CartPage = () => {
   const navigate = useNavigate()
@@ -32,7 +33,29 @@ const CartPage = () => {
     </div>
   )
 
-  return (
+  const user=useAuth();
+
+  {
+    if(!user || !user.user){
+        return(
+            <div
+            className='bg-surface min-h-screen flex flex-col items-center justify-center py-20 gap-6'
+            >
+                <h2 className='text-headline-lg text-on-surface'>Please Login to Continue</h2>
+                <p className='text-body-md text-on-surface-variant'>Browse our products and add items to your cart</p>
+                <button
+                onClick={() => navigate('/login')}
+                className='px-6 py-3 bg-primary text-white font-bold rounded border border-primary-container shadow-[0px_2px_0px_#001040] hover:-translate-y-0.5 transition-all'
+                >
+                    Login
+                </button>
+                
+            </div>
+        )
+    }
+  }
+
+  return(
     <div className="bg-surface min-h-screen">
       {/* Page header */}
       <div className="bg-primary text-white py-10">
