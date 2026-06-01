@@ -19,14 +19,14 @@ const AdminCustomRequests = () => {
   return (
     <div className="p-6 space-y-5">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-headline-lg text-on-surface">Custom Requests Management</h1>
           <p className="text-body-md text-on-surface-variant mt-1">
             Review and provide technical quotes for complex polythene manufacturing inquiries.
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button className="flex items-center gap-2 px-4 py-2 border border-outline rounded bg-white text-label-md font-mono text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -43,7 +43,7 @@ const AdminCustomRequests = () => {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'PENDING REVIEW',    value: '12', sub: '! 4 High Priority',  subColor: 'text-red-600' },
           { label: 'QUOTED (TODAY)',     value: '08', sub: '↑ +15% vs Yesterday', subColor: 'text-green-600' },
@@ -61,12 +61,12 @@ const AdminCustomRequests = () => {
       {/* Requests Table */}
       <div className="bg-white rounded border border-gray-200 overflow-hidden">
         {/* Tabs + count */}
-        <div className="flex items-center gap-0 px-4 py-3 border-b border-gray-200">
+        <div className="flex flex-wrap items-center gap-2 px-4 py-3 border-b border-gray-200">
           {['All Requests', 'Pending', 'Quoted'].map(t => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`px-4 py-2 text-label-md font-mono rounded transition-all mr-1 ${
+              className={`px-4 py-2 text-label-md font-mono rounded transition-all ${
                 tab === t
                   ? 'bg-white border border-gray-300 text-on-surface shadow-sm'
                   : 'text-on-surface-variant hover:text-on-surface'
@@ -75,14 +75,15 @@ const AdminCustomRequests = () => {
               {t}
             </button>
           ))}
-          <span className="ml-auto text-label-sm font-mono text-on-surface-variant">
+          <span className="w-full sm:w-auto sm:ml-auto text-label-sm font-mono text-on-surface-variant mt-2 sm:mt-0">
             Showing 1–{filtered.length} of 48 requests
           </span>
         </div>
 
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-200 bg-[#f9fafb]">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[900px]">
+            <thead>
+              <tr className="border-b border-gray-200 bg-[#f9fafb]">
               {['REQUEST ID', 'CUSTOMER', 'MATERIAL SPEC', 'DIMENSIONS', 'THICKNESS', 'STATUS', 'ACTIONS'].map(h => (
                 <th key={h} className="px-4 py-3 text-left text-label-sm font-mono uppercase tracking-wider text-on-surface-variant">{h}</th>
               ))}
@@ -126,10 +127,11 @@ const AdminCustomRequests = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       {/* Bottom panels */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Quote Intelligence */}
         <div className="bg-primary rounded p-5 text-white">
           <h3 className="text-body-md font-bold mb-2">Quote Intelligence Dashboard</h3>

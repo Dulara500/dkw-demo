@@ -23,14 +23,14 @@ const AdminOrders = () => {
   return (
     <div className="p-6 space-y-5">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-headline-lg text-on-surface">Order Management</h1>
           <p className="text-body-md text-on-surface-variant mt-1">
             Monitor and manage all manufacturing order flows.
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button className="flex items-center gap-2 px-4 py-2 border border-outline rounded bg-white text-label-md font-mono text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -47,7 +47,7 @@ const AdminOrders = () => {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'ACTIVE PRODUCTION', value: '142', sub: '+12%', subColor: 'text-green-600', bar: 'bg-primary', barW: '65%' },
           { label: 'PENDING PAYMENT',   value: '28',  sub: '-4%',  subColor: 'text-red-500',   bar: 'bg-[#e55100]', barW: '35%' },
@@ -111,9 +111,10 @@ const AdminOrders = () => {
           </div>
         </div>
 
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-200 bg-[#f9fafb]">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[800px]">
+            <thead>
+              <tr className="border-b border-gray-200 bg-[#f9fafb]">
               <th className="px-4 py-3 w-8">
                 <input type="checkbox" className="w-4 h-4 accent-primary rounded" />
               </th>
@@ -167,6 +168,7 @@ const AdminOrders = () => {
             ))}
           </tbody>
         </table>
+        </div>
 
         {/* Pagination */}
         <div className="flex items-center justify-between px-5 py-3 border-t border-gray-200 bg-[#f9fafb]">
@@ -186,11 +188,11 @@ const AdminOrders = () => {
       </div>
 
       {/* Status bar */}
-      <div className="bg-white rounded border border-gray-200 px-5 py-3 flex items-center gap-6 text-label-sm font-mono text-on-surface-variant">
+      <div className="bg-white rounded border border-gray-200 px-5 py-3 flex flex-wrap items-center gap-4 sm:gap-6 text-label-sm font-mono text-on-surface-variant">
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-green-500 inline-block"></span> Production Line A: ACTIVE</span>
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-green-500 inline-block"></span> Warehouse Sync: OK</span>
         <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-orange-500 inline-block"></span> Server Load: 42%</span>
-        <span className="ml-auto">Last system refresh: <strong className="text-on-surface">2 mins ago</strong></span>
+        <span className="ml-0 sm:ml-auto w-full sm:w-auto text-left sm:text-right mt-2 sm:mt-0">Last system refresh: <strong className="text-on-surface">2 mins ago</strong></span>
       </div>
     </div>
   )

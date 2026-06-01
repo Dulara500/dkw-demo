@@ -85,6 +85,7 @@ const AdminLayout = () => {
   const navigate = useNavigate()
   const { user, logout } = useAuth()
   const [search, setSearch] = useState('')
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const isActive = (to) => {
     if (to === '/admin') return location.pathname === '/admin'
@@ -93,12 +94,25 @@ const AdminLayout = () => {
 
   return (
     <div className="flex h-screen bg-[#f0f2f5] overflow-hidden">
+      {/* ── Mobile Sidebar Overlay ──────────────────── */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-30 md:hidden" 
+          onClick={() => setSidebarOpen(false)} 
+        />
+      )}
+
       {/* ── Sidebar ─────────────────────────────────── */}
-      <aside className="w-44 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col">
+      <aside className={`fixed inset-y-0 left-0 z-40 w-56 md:w-44 bg-white border-r border-gray-200 flex flex-col transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:static flex-shrink-0`}>
         {/* Brand */}
-        <div className="px-4 py-5 border-b border-gray-100">
-          <p className="text-body-md font-bold text-primary leading-tight">Admin Panel</p>
-          <p className="text-label-sm font-mono text-on-surface-variant mt-0.5">Manufacturing Ops</p>
+        <div className="px-4 py-5 border-b border-gray-100 flex items-center justify-between">
+          <div>
+            <p className="text-body-md font-bold text-primary leading-tight">Admin Panel</p>
+            <p className="text-label-sm font-mono text-on-surface-variant mt-0.5">Manufacturing Ops</p>
+          </div>
+          <button className="md:hidden p-1 text-on-surface-variant" onClick={() => setSidebarOpen(false)}>
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
         </div>
 
         {/* Main Nav */}
@@ -158,8 +172,18 @@ const AdminLayout = () => {
       {/* ── Main Content ─────────────────────────────── */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         {/* Top bar */}
-        <header className="bg-white border-b border-gray-200 px-6 py-3 flex items-center gap-4 flex-shrink-0">
-          <div className="flex-1 max-w-md">
+        <header className="bg-white border-b border-gray-200 px-4 md:px-6 py-3 flex items-center gap-3 md:gap-4 flex-shrink-0">
+          {/* Hamburger (Mobile Only) */}
+          <button 
+            className="md:hidden p-2 text-on-surface-variant hover:text-primary transition-colors -ml-2"
+            onClick={() => setSidebarOpen(true)}
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          <div className="flex-1 max-w-md hidden sm:block">
             <div className="relative">
               <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -167,13 +191,13 @@ const AdminLayout = () => {
               <input
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="Search orders, products, customers..."
+                placeholder="Search..."
                 className="w-full pl-9 pr-4 py-2 bg-[#f0f2f5] border border-gray-200 rounded text-label-md font-mono text-on-surface focus:outline-none focus:border-primary"
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-3 ml-auto">
+          <div className="flex items-center gap-2 md:gap-3 ml-auto">
             {/* Bell */}
             <button className="relative p-2 text-on-surface-variant hover:text-primary transition-colors">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -193,11 +217,11 @@ const AdminLayout = () => {
             </button>
 
             {/* User */}
-            <div className="flex items-center gap-2 pl-3 border-l border-gray-200">
+            <div className="flex items-center gap-2 pl-2 md:pl-3 border-l border-gray-200">
               <div className="w-8 h-8 rounded-full bg-primary text-white text-label-sm font-bold flex items-center justify-center">
                 {user ? user.initials : 'AD'}
               </div>
-              <div>
+              <div className="hidden sm:block">
                 <p className="text-label-sm font-semibold text-on-surface leading-tight">{user ? user.name : 'Admin User'}</p>
                 <button onClick={() => { logout(); navigate('/login') }} className="text-[10px] font-mono text-[#e55100] hover:underline">
                   Sign Out

@@ -49,14 +49,14 @@ const AdminDashboard = () => {
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-headline-lg text-on-surface">Operations Overview</h1>
           <p className="text-body-md text-on-surface-variant mt-1">
             Real-time tracking of polythene production and sales performance.
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button className="flex items-center gap-2 px-4 py-2 border border-outline rounded text-label-md font-mono text-on-surface-variant hover:border-primary hover:text-primary transition-colors bg-white">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -73,7 +73,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'TOTAL ORDERS',    value: '1,284', sub: '+12.5%',  subColor: 'text-green-600', accent: 'border-l-primary' },
           { label: 'MONTHLY REVENUE', value: '$142,500', sub: '+4.2%', subColor: 'text-green-600', accent: 'border-l-secondary' },
@@ -89,9 +89,9 @@ const AdminDashboard = () => {
       </div>
 
       {/* Chart + Activity */}
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
         {/* Bar Chart */}
-        <div className="col-span-3 bg-white rounded border border-gray-200 p-5">
+        <div className="lg:col-span-3 bg-white rounded border border-gray-200 p-5">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-body-md font-bold text-on-surface">Order Volume (7 Days)</h3>
             <div className="flex items-center gap-4">
@@ -109,7 +109,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Recent Activity */}
-        <div className="col-span-2 bg-white rounded border border-gray-200 p-5">
+        <div className="lg:col-span-2 bg-white rounded border border-gray-200 p-5">
           <h3 className="text-body-md font-bold text-on-surface mb-4">Recent Activity</h3>
           <div className="space-y-3">
             {recentActivity.map(({ id, desc, status, statusColor, time }) => (
@@ -148,9 +148,10 @@ const AdminDashboard = () => {
             </svg>
           </button>
         </div>
-        <table className="w-full">
-          <thead>
-            <tr className="bg-[#f9fafb] border-b border-gray-200">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[700px]">
+            <thead>
+              <tr className="bg-[#f9fafb] border-b border-gray-200">
               {['JOB ID', 'MATERIAL TYPE', 'THICKNESS', 'QUANTITY', 'ESTIMATED COMPLETION', 'STATUS'].map(h => (
                 <th key={h} className="px-4 py-3 text-left text-label-sm font-mono uppercase tracking-wider text-on-surface-variant">{h}</th>
               ))}
@@ -171,6 +172,7 @@ const AdminDashboard = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   )

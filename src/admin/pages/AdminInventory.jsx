@@ -31,7 +31,7 @@ const AdminInventory = () => {
   return (
     <div className="p-6 space-y-5">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-headline-lg text-on-surface">Inventory Asset Registry</h1>
           <p className="text-body-md text-on-surface-variant mt-1">
@@ -44,9 +44,9 @@ const AdminInventory = () => {
       </div>
 
       {/* Stock overview */}
-      <div className="grid grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-4">
         {/* Live Stock */}
-        <div className="col-span-3 bg-white rounded border border-gray-200 p-5">
+        <div className="lg:col-span-3 bg-white rounded border border-gray-200 p-5">
           <div className="flex items-center justify-between mb-4">
             <div>
               <p className="text-label-sm font-mono uppercase tracking-widest text-on-surface-variant border-b-2 border-primary pb-1 inline-block">
@@ -55,7 +55,7 @@ const AdminInventory = () => {
             </div>
             <span className="text-label-sm font-mono font-bold px-2.5 py-1 bg-teal-100 text-teal-700 border border-teal-200 rounded">OPTIMIZED</span>
           </div>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             <div>
               <p className="text-label-sm font-mono uppercase tracking-wider text-on-surface-variant mb-1">Total SKUs</p>
               <p className="text-headline-lg font-bold text-on-surface">1,248</p>
@@ -72,7 +72,7 @@ const AdminInventory = () => {
         </div>
 
         {/* LDPE Resin */}
-        <div className="col-span-2 bg-primary rounded p-5 text-white">
+        <div className="lg:col-span-2 bg-primary rounded p-5 text-white">
           <p className="text-body-md font-bold mb-1">LDPE Resin Supply</p>
           <p className="text-label-sm font-mono text-white/70 mb-4">
             Current raw material reserves for high-density production lines.
@@ -105,9 +105,10 @@ const AdminInventory = () => {
           </span>
         </div>
 
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-200 bg-[#f9fafb]">
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[800px]">
+            <thead>
+              <tr className="border-b border-gray-200 bg-[#f9fafb]">
               {['PRODUCT NAME / SKU', 'CATEGORY', 'STOCK LEVEL', 'PRICE / UNIT', 'ACTIONS'].map(h => (
                 <th key={h} className="px-5 py-3 text-left text-label-sm font-mono uppercase tracking-wider text-on-surface-variant">{h}</th>
               ))}
@@ -143,6 +144,7 @@ const AdminInventory = () => {
             ))}
           </tbody>
         </table>
+        </div>
 
         {/* Pagination */}
         <div className="flex items-center justify-between px-5 py-3 border-t border-gray-200 bg-[#f9fafb]">
@@ -168,7 +170,7 @@ const AdminInventory = () => {
       </div>
 
       {/* Footer Metadata */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
           { label: 'LAST SUPPLY AUDIT',  value: 'Oct 24, 2023 · 14:00 EST', sub: 'Verified by J. Thompson', accent: 'border-l-secondary' },
           { label: 'RECYCLING INDEX',     value: '94.2% Pure Material',        sub: 'Grade A Industrial Standard', accent: 'border-l-primary' },

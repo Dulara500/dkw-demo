@@ -19,14 +19,14 @@ const AdminCustomers = () => {
   return (
     <div className="p-6 space-y-5">
       {/* Header */}
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-headline-lg text-on-surface">Customer Management</h1>
+          <h1 className="text-headline-lg text-on-surface">Client Portfolio</h1>
           <p className="text-body-md text-on-surface-variant mt-1">
-            Manage 1,284 registered B2B clients and their technical specifications.
+            Manage enterprise customer relationships and account status.
           </p>
         </div>
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button className="flex items-center gap-2 px-4 py-2 border border-outline rounded bg-white text-label-md font-mono text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -40,7 +40,7 @@ const AdminCustomers = () => {
       </div>
 
       {/* Stat Cards */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'ACTIVE ACCOUNTS',    value: '1,102', sub: '↑ +4.2% this month',       subColor: 'text-green-600', accentColor: 'border-l-secondary' },
           { label: 'TOTAL REVENUE (LTV)', value: '$2.4M',  sub: 'Avg. $2.1k per client',   subColor: 'text-on-surface-variant', accentColor: 'border-l-primary' },
@@ -55,71 +55,60 @@ const AdminCustomers = () => {
         ))}
       </div>
 
-      {/* Customer Table */}
+      {/* Customers Table */}
       <div className="bg-white rounded border border-gray-200 overflow-hidden">
-        {/* Toolbar */}
-        <div className="flex items-center gap-3 px-5 py-3 border-b border-gray-200">
-          <span className="text-label-sm font-mono text-on-surface-variant">Filter by Industry:</span>
-          <select
-            value={industryFilter}
-            onChange={e => setIndustryFilter(e.target.value)}
-            className="px-3 py-1.5 border border-gray-200 rounded text-label-md font-mono text-on-surface bg-white focus:outline-none focus:border-primary"
-          >
-            {['All Sectors', 'E-Commerce', 'Food & Beverage', 'Construction', 'Pharmaceuticals'].map(s => (
-              <option key={s}>{s}</option>
-            ))}
-          </select>
-          <div className="ml-auto flex items-center gap-2">
-            <button className="p-2 text-on-surface-variant hover:text-primary transition-colors">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-              </svg>
-            </button>
-            <button className="p-2 text-on-surface-variant hover:text-primary transition-colors">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-              </svg>
-            </button>
+        <div className="flex flex-wrap items-center gap-4 px-4 py-3 border-b border-gray-200">
+          <div className="relative flex-1 min-w-[200px]">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" placeholder="Search accounts by name or ID..." className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded text-label-md font-mono focus:outline-none focus:border-primary" />
           </div>
+          <button className="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded text-label-md font-mono text-on-surface-variant hover:border-primary hover:text-primary transition-colors">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>
+            Filter
+          </button>
         </div>
 
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-gray-200 bg-[#f9fafb]">
-              {['CUSTOMER / BUSINESS', 'EMAIL', 'TOTAL ORDERS', 'LIFETIME VALUE', 'JOIN DATE', ''].map((h, i) => (
-                <th key={i} className="px-5 py-3 text-left text-label-sm font-mono uppercase tracking-wider text-on-surface-variant">{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            {customers.map((c) => (
-              <tr key={c.email} className="hover:bg-[#f9fafb] transition-colors">
-                <td className="px-5 py-4">
-                  <div className="flex items-center gap-3">
-                    <div className={`w-9 h-9 rounded ${c.color} text-white text-label-sm font-bold flex items-center justify-center flex-shrink-0`}>
-                      {c.initials}
-                    </div>
-                    <div>
-                      <p className="text-body-md font-bold text-on-surface">{c.name}</p>
-                      <p className="text-label-sm font-mono text-secondary mt-0.5 uppercase tracking-wider">{c.sector}</p>
-                    </div>
-                  </div>
-                </td>
-                <td className="px-5 py-4 text-label-md font-mono text-on-surface-variant">{c.email}</td>
-                <td className="px-5 py-4">
-                  <span className="px-2.5 py-1 bg-gray-100 text-on-surface text-label-sm font-mono rounded border border-gray-200">
-                    {c.orders} Orders
-                  </span>
-                </td>
-                <td className="px-5 py-4 text-body-md font-mono font-bold text-primary">{c.ltv}</td>
-                <td className="px-5 py-4 text-label-md font-mono text-on-surface-variant">{c.join}</td>
-                <td className="px-5 py-4">
-                  <div className="w-1 h-8 bg-primary rounded-full" />
-                </td>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[900px]">
+            <thead>
+              <tr className="border-b border-gray-200 bg-[#f9fafb]">
+                {['CUSTOMER / BUSINESS', 'EMAIL', 'TOTAL ORDERS', 'LIFETIME VALUE', 'JOIN DATE', ''].map((h, i) => (
+                  <th key={i} className="px-5 py-3 text-left text-label-sm font-mono uppercase tracking-wider text-on-surface-variant">{h}</th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-gray-100">
+              {customers.map((c) => (
+                <tr key={c.email} className="hover:bg-[#f9fafb] transition-colors">
+                  <td className="px-5 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-9 h-9 rounded ${c.color} text-white text-label-sm font-bold flex items-center justify-center flex-shrink-0`}>
+                        {c.initials}
+                      </div>
+                      <div>
+                        <p className="text-body-md font-bold text-on-surface">{c.name}</p>
+                        <p className="text-label-sm font-mono text-secondary mt-0.5 uppercase tracking-wider">{c.sector}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-5 py-4 text-label-md font-mono text-on-surface-variant">{c.email}</td>
+                  <td className="px-5 py-4">
+                    <span className="px-2.5 py-1 bg-gray-100 text-on-surface text-label-sm font-mono rounded border border-gray-200">
+                      {c.orders} Orders
+                    </span>
+                  </td>
+                  <td className="px-5 py-4 text-body-md font-mono font-bold text-primary">{c.ltv}</td>
+                  <td className="px-5 py-4 text-label-md font-mono text-on-surface-variant">{c.join}</td>
+                  <td className="px-5 py-4">
+                    <div className="w-1 h-8 bg-primary rounded-full" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         {/* Pagination */}
         <div className="flex items-center justify-between px-5 py-3 border-t border-gray-200 bg-[#f9fafb]">
@@ -139,7 +128,7 @@ const AdminCustomers = () => {
       </div>
 
       {/* Bottom panels */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Recent Activity */}
         <div className="bg-white rounded border border-gray-200 p-5">
           <div className="flex items-center justify-between mb-4">
