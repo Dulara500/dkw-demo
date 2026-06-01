@@ -119,15 +119,15 @@ const AdminLayout = () => {
           ))}
         </nav>
 
-        {/* Create Order CTA
+        {/* Create Order CTA */}
         <div className="px-3 pb-3">
           <button
-            onClick={() => navigate('/admin/orders')}
+            onClick={() => navigate('/admin/inventory')}
             className="w-full py-2.5 bg-[#e55100] text-white text-label-md font-semibold rounded border border-[#bf3c00] shadow-[0px_2px_0px_#7a2400] hover:-translate-y-0.5 hover:bg-[#bf3c00] transition-all text-center"
           >
-            + Create New Order
+            + Create New Product
           </button>
-        </div> */}
+        </div>
 
         {/* Bottom Nav */}
         <div className="border-t border-gray-100 py-3 px-2 space-y-0.5">

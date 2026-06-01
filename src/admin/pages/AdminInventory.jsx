@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import AdminAddNewProducts from './AdminAddNewProducts'
 
 const inventory = [
   { name: 'Industrial LDPE Roll (100m)',     sku: 'SKU: RL-772-B', category: 'ROLLS',        stock: 1402, max: 2000, price: '$42.50', low: false },
@@ -24,6 +26,7 @@ const StockBar = ({ stock, max, low }) => {
 
 const AdminInventory = () => {
   const [page, setPage] = useState(1)
+  const navigate = useNavigate()
 
   return (
     <div className="p-6 space-y-5">
@@ -35,7 +38,7 @@ const AdminInventory = () => {
             Real-time oversight of polythene stock and raw polymer resins.
           </p>
         </div>
-        <button className="flex items-center gap-2 px-4 py-2 bg-[#e55100] text-white text-label-md font-semibold rounded border border-[#bf3c00] shadow-[0px_2px_0px_#7a2400] hover:-translate-y-0.5 hover:bg-[#bf3c00] transition-all">
+        <button className="flex items-center gap-2 px-4 py-2 bg-[#e55100] text-white text-label-md font-semibold rounded border border-[#bf3c00] shadow-[0px_2px_0px_#7a2400] hover:-translate-y-0.5 hover:bg-[#bf3c00] transition-all" onClick={()=> navigate('/admin/add-item')}>
           + Add New Item
         </button>
       </div>
